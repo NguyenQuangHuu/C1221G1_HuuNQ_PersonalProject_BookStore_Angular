@@ -1,0 +1,19 @@
+<div>
+<div class="flex align-items-center justify-content-between bg-teal-50 mb-2" >
+  <div>
+    <a routerLink="/" class="text-teal-800 no-underline">Trang chủ</a>
+  </div>
+  <div class="">
+    <img src="../../assets/image/logo.png" alt="" width="100" height="100" style="object-fit: cover">
+  </div>
+  <ng-container >
+    <a *ngIf="!username ; else loginBlock" routerLink="/sign-in" class="text-teal-800 no-underline">Đăng ký / Đăng nhập</a>
+    <ng-template #loginBlock>
+      <div class="mx-2">
+        <span class="text-pink-900">Xin chào: {{username}}</span>
+        <p class="my-1 cursor-pointer text-cyan-600" (click)="logout()">Đăng xuất</p>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
+</div>

@@ -1,0 +1,78 @@
+<div style="width:1280px" class="mx-auto">
+<!--840 x 320-->
+  <div class="grid">
+    <div class="col col-8 border-round">
+      <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions"
+                  [containerStyle]="{'max-width': '840px'}" [numVisible]="5"
+                  [showThumbnails]="false" [showIndicators]="true" autoPlay="3000"
+                  [changeItemOnIndicatorHover]="true"
+                  circular="true"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.previewImageSrc" style="width: 100%; display: block; height: 300px; border-radius: 2px" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <div class="grid grid-nogutter justify-content-center">
+            <img [src]="item.thumbnailImageSrc" style="display: block;" />
+          </div>
+        </ng-template>
+      </p-galleria>
+<!--      <img class="border-round" src="https://cdn0.fahasa.com/media/magentothem/banner7/shopeePAY_840X320.png" alt="">-->
+    </div>
+    <div class="col col-4">
+
+        <div ><img class="border-round" src="https://cdn0.fahasa.com/media/wysiwyg/Thang-07-2022/Big%20sale%202_Flash%20Sale_Sub%20banner_392x156.jpg" alt="" width="100%"></div>
+        <div ><img class="border-round" src="https://cdn0.fahasa.com/media/wysiwyg/VY-VHDT/STK_Banner_392x156.jpg" alt="" width="100%"></div>
+
+    </div>
+
+  </div>
+  <div class="flex justify-content-center align-items-baseline  w-full">
+    <div>
+
+    </div>
+    <div>
+
+    </div>
+  </div>
+  <div class="card bg-teal-50 border-round ">
+    <div class="flex card-container overflow-hidden">
+      <div class="flex-none flex align-items-center justify-content-center  font-bold px-5  border-round">
+        <i class="pi pi-home cursor-pointer"></i></div>
+      <div class="flex-grow-1 flex align-items-center justify-content-center font-bold  px-5  border-round">
+        <p class="p-text-secondary">Tìm kiếm </p>
+        <input type="text" pInputText [(ngModel)]="name" class="mx-2 p-inputtext-sm" placeholder="Tìm kiếm tên sách">
+        <button pButton icon="pi pi-search " class="p-button-sm" (click)="searchSubmit()"></button>
+      </div>
+      <div class="flex-none flex align-items-center justify-content-center font-bold m-2 px-5 py-3 border-round">
+        <a routerLink="/cart-detail"><i class="pi pi-shopping-cart mr-4 p-text-secondary" pBadge style="font-size: 2rem" value="2"></i></a>
+      </div>
+    </div>
+  </div>
+  <h4 class="text-pink-600 py-2 my-2 text-3xl text-center">Sách mới</h4>
+  <div class="grid min-h-screen">
+    <div class="col-2" *ngFor="let b of book">
+      <div class="shadow-2 px-2 py-1 w-12">
+        <div>
+          <img src="{{b.img}}" alt="" width="190px" height="190px">
+          <p class="text-teal-800 book-name font-bold my-2"><a routerLink="/books/{{b.id}}" class="no-underline text-teal-600">{{b.name}}</a></p>
+          <p class="text-blue-500 my-2">{{(+b.price).toLocaleString('vi-VN', {style:'currency',currency:'VND'})}}</p>
+          <p class="my-2">
+            <span class="description">{{b.description}}</span>
+          </p>
+          <div class="w-full text-center">
+            <button class="p-button-sm bg-teal-400" pButton label="-" (click)="decrease(b.id)"></button>
+            <input pInputText readonly type="text" style="width:40px;text-align: center" [value]="map.get(b.id)" class="p-inputtext-sm mx-1">
+            <button class="p-button-sm" pButton label="+" (click)="increase(b.id)"></button>
+          </div>
+          <button pButton pRipple type="button" (click)="addToCart(b.id)" label="Thêm vào giỏ hàng" class="p-button-sm p-button-rounded bg-green-500 my-1 mx-auto w-12"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-paginator  [totalRecords]="totalElement"
+               [showPageLinks]="true"
+               (onPageChange)="paginate($event)"
+               [rows]="size"
+  ></p-paginator>
+</div>

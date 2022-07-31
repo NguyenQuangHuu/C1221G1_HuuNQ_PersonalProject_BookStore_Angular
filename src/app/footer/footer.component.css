@@ -1,0 +1,13 @@
+
+.product-item .product-item-content {
+  border: 1px solid var(--teal-50);
+  border-radius: 3px;
+  margin: .3rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.product-item .product-image {
+  width: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.46)
+}

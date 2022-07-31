@@ -1,0 +1,92 @@
+
+<div style="width: 1280px" class="mx-auto ">
+  <h4 class="text-cyan-600 text-2xl text-center">Giỏ hàng</h4>
+  <div class="grid"  *ngIf="cartDetail.length>0; else noBook">
+    <div class="col-12 shadow-2 border-round-md">
+      <div class="grid ">
+        <div class="col-6">
+          <div class="grid">
+            <div class="col-4 text-center">
+              Ảnh
+            </div>
+            <div class="col-8 text-center">
+              Thông tin
+            </div>
+          </div>
+
+        </div>
+        <div class="col-2 text-center">
+          Số lượng
+        </div>
+        <div class="col-2 text-center">
+          Tạm tính
+        </div>
+
+      </div>
+      <div class="grid " *ngFor="let cd of cartDetail">
+        <div class="col-6">
+          <div class="grid">
+            <div class="col-4 text-center">
+              <img src="{{cd.book.img}}" alt="" width="100%" class="shadow-1">
+            </div>
+            <div class="col-8 flex flex-column">
+              <div class="flex-grow-1">
+                <p class="text-lg text-blue-300 text-overflow-ellipsis overflow-hidden my-0">Tên sản phẩm: <span class="text-cyan-600">{{cd.book.name}}</span></p>
+              </div>
+              <div>
+                <p class="text-blue-500 my-0">Đơn giá: <span class="text-cyan-900">{{(+cd.book.price).toLocaleString('it-IT',{
+                  style:'currency',currency:'VND'
+                })}}</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-2 text-center text-purple-400">
+          <div class="w-full text-center">
+            <button class="p-button-sm bg-teal-400" pButton label="-" (click)="decrease(cd)"></button>
+            <input pInputText readonly type="text" style="width:40px;text-align: center" value="{{cd.quantity}}" class="p-inputtext-sm mx-1">
+            <button class="p-button-sm" pButton label="+" (click)="increase(cd)"></button>
+          </div>
+        </div>
+        <div class="col-2 text-center text-orange-500">
+          {{(cd.book.price * cd.quantity).toLocaleString('it-IT',{style:'currency',currency:'VND'})}}
+        </div>
+        <div class="col-2 text-center">
+          <i class="pi pi-ban cursor-pointer hover:text-orange-500" (click)="confirm(cd)"></i>
+        </div>
+      </div>
+
+      <div class="col-offset-6">
+        <hr>
+        <div class="grid">
+          <div class="col-4">
+            <p class="text-center text-pink-500">Tổng tiền</p>
+          </div>
+          <div class="col-4">
+            <p class="text-center text-orange-400">{{totalBill.toLocaleString('it-IT',{style:'currency',currency:'VND'})}}</p>
+          </div>
+          <div class="col-4 py-2 text-center">
+            <button pButton class="p-button-success p-button-rounded p-button-outlined">Thanh toán</button>
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <ng-template #noBook>
+    <div class="text-center">
+      <img src="https://bizweb.dktcdn.net/100/342/226/themes/701538/assets/empty-cart.png?1649915825940" alt="Giỏ hàng trống">
+    </div>
+  </ng-template>
+</div>
+<p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" #cd [style]="{width: '50vw'}" class="p-1">
+  <ng-template pTemplate="header">
+    <h3 class="text-orange-400">Cảnh báo!</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>

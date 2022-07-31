@@ -1,0 +1,33 @@
+<p-carousel [value]="products" styleClass="custom-carousel" [numVisible]="5" [numScroll]="1" [circular]="true"
+            [autoplayInterval]="2000" [responsiveOptions]="responsiveOptions">
+  <ng-template pTemplate="header">
+  </ng-template>
+  <ng-template let-product pTemplate="item">
+    <div class="product-item">
+      <div class="product-item-content  bg-teal-50">
+        <div class="p-mb-3">
+          <img
+            src="https://salt.tikicdn.com/cache/400x400/ts/product/0c/ff/1f/091c739d2cc4c1b2a3a9c5025930adcc.jpg.webp"
+            alt="" class="product-image">
+        </div>
+        <div>
+          <h4 class="p-mb-1 m-0 text-teal-900">{{product.name}}</h4>
+          <h6 class="p-mt-0 p-mb-3 m-0 text-teal-500">{{product.price}}</h6>
+          <span
+            [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()" class="text-cyan-900">{{product.inventoryStatus}}</span>
+          <div class="car-buttons p-mt-5">
+            <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+            <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2 mx-2" icon="pi pi-star"></p-button>
+            <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-container>
+
+  </ng-container>
+</p-carousel>
+
+
+

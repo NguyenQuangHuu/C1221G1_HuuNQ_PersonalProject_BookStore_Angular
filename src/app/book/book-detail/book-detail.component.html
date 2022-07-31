@@ -1,0 +1,57 @@
+<div style="width: 1280px" class="mx-auto px-8">
+  <div class="grid my-2">
+    <div class="col-4 shadow-1">
+    <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions"
+                [containerStyle]="{'max-width': '524px', 'margin-top':'2em','background-color':'white'}" [numVisible]="4"
+                thumbnailsPosition="bottom" visible="true" circular="2000" autoPlay="2000">
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+      </ng-template>
+      <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+          <img [src]="item.thumbnailImageSrc" width="64px" height="64px"/>
+        </div>
+      </ng-template>
+    </p-galleria>
+    </div>
+    <div class="col-8 px-8">
+      <div class="grid">
+        <div class="col col-12 col-offset-0 p-0">
+          <p class="text-2xl "><span class="text-teal-600 font-bold">{{book.name}}</span> - <span class="text-cyan-600 font-medium">{{book.author.name}}</span></p>
+        </div>
+        <div class="grid w-full">
+          <p class="col-6 inline-block">Mã sách: <span class="font-bold text-blue-500">{{book.code}}</span></p>
+          <p class="col-6 ">Ngày phát hành:  <span class="font-bold text-green-500">{{book.releaseDate}}</span></p>
+        </div>
+        <div class="grid w-full">
+          <p class="col-6 inline-block">Tác giả:  <span class="font-bold text-green-500">{{book.author.name}}</span></p>
+          <p class="col-6 ">Dịch giả:  <span class="font-bold text-bluegray-500">{{book.translator}}</span></p>
+        </div>
+        <div class="grid w-full">
+          <p class="col-6 inline-block">Nhà xuất bản:  <span class="font-bold text-teal-500">{{book.publisher}}</span></p>
+          <p class="col-6 ">Danh mục:  <span class="font-bold text-green-500">{{book.category.name}}</span></p>
+        </div>
+        <div class="grid w-full">
+          <p class="col-6 inline-block">Số trang:  <span class="font-bold text-blue-500">{{book.totalPage}}</span></p>
+          <p class="col-6 ">Kích thước:  <span class="font-bold text-gray-500">{{book.size}}</span></p>
+        </div>
+        <div class="w-full">
+          <p>Giá (vnđ):  <span class="font-bold text-3xl text-pink-400">{{book.price | currency:'VND'}}</span></p>
+        </div>
+        <div class="w-full">
+          <div>
+            <button class="p-button-sm bg-teal-400 w-1" pButton label="-"></button>
+            <input pInputText readonly type="text" style="width:60px;text-align: center" value="1" class="p-inputtext-sm mx-2">
+            <button class="p-button-sm w-1" pButton label="+"></button>
+            <div class="my-2">
+              <button pButton icon="pi pi-shopping-cart" class="p-button-rounded" label="Thêm vào giỏ hàng"></button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
